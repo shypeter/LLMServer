@@ -3,6 +3,7 @@ from flask_cors import CORS
 import os
 import logging
 from llm_handler import LLMHandler
+from llm_model_handler import LLMModelHandler
 
 app = Flask(__name__)
 CORS(app)
@@ -18,7 +19,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-llm_handler = LLMHandler(model_path)
+#llm_handler = LLMHandler(model_path)
+llm_handler = LLMModelHandler()
 
 @app.route('/api/health', methods=['GET'])
 def health_check():
