@@ -12,9 +12,9 @@ class LLMHandler:
                 self.llm = Llama(
                     model_path=model_path,
                     n_ctx=2048,
-                    n_gpu_layers=99999,  # 使用最大值來嘗試將所有層都放在 GPU 上
-                    main_gpu=0,          # 主 GPU 索引
-                    tensor_split=None,    # 若有多個 GPU，可以設定張量分割，例如 [0.5, 0.5]
+                    #n_gpu_layers=99999,  # 使用最大值來嘗試將所有層都放在 GPU 上
+                    #main_gpu=0,          # 主 GPU 索引
+                    #tensor_split=None,    # 若有多個 GPU，可以設定張量分割，例如 [0.5, 0.5]
                     n_threads=4
                 )
                 print(f"模型 {model_path} 已成功載入")
