@@ -1,5 +1,5 @@
-#from transformers import AutoModelForCausalLM, AutoTokenizer
-from transformers import GemmaTokenizer, GemmaForCausalLM
+from transformers import AutoModelForCausalLM, AutoConfig
+from transformers import GemmaTokenizer
 import torch
 import os
 
@@ -13,12 +13,17 @@ class LLMModelHandler:
                 print(f"Available GPU memory: {torch.cuda.get_device_properties(0).total_memory / 1024**3:.2f} GB")
                 torch.cuda.empty_cache()
 
-            self.tokenizer = GemmaTokenizer.from_pretrained(self.model_name)
-            self.llm = GemmaForCausalLM.from_pretrained(
+            config = AutoConfig.from_pretrained(self.model_name)
+            self.tokenizer = GemmaTokenizer.from_pretrained(
                 self.model_name,
+                trust_remote_code=True,
+            )
+            self.llm = AutoModelForCausalLM.from_pretrained(
+                self.model_name,
+                config=config,
                 device_map="auto",
                 torch_dtype=torch.float16,
-                #trust_remote_code=True
+                trust_remote_code=True
             )
 
             print(f"模型 {self.model_name} 已成功載入")

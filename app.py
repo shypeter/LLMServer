@@ -19,8 +19,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-#llm_handler = LLMHandler(model_path)
-llm_handler = LLMModelHandler()
+llm_handler = LLMHandler(model_path)
+#llm_handler = LLMModelHandler()
 
 @app.route('/api/health', methods=['GET'])
 def health_check():
